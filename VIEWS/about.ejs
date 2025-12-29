@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Reset + base */
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.7;
+  background: #f8f9fb;
+  color: #333;
+}
+
+/* About Section */
+.about {
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 3rem 2rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.about h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color:#f39c12;             /* nice deep blue */
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.about p {
+  font-size: 1.05rem;
+ color:black;
+  margin-bottom: 1.8rem;
+}
+
+.about h2 {
+  font-size: 1.8rem;
+  margin: 2rem 0 1rem;
+  color:#f39c12;            /* accent blue */
+  font-weight: 600;
+}
+
+.about ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 500px;
+  text-align: left;
+}
+
+.about ul li {
+  background: #f1f5f9;
+  padding: 0.9rem 1.2rem;
+  margin-bottom: 0.8rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about ul li::before {
+  content: "✔";
+  color: #16a34a;             /* green check */
+  font-weight: bold;
+}
+
+.about ul li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Smooth animation for section load */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+  </style>
+</head>
+<body>
+
+
+
+   <!-- Navbar -->
+  <header class="navbar">
+     <div class="logo" style="display:flex; align-items:center; gap:10px;">
+     <a href="/"><img src="images/Screenshot 2025-09-04 162733.png" alt="" style="height:50px; width:auto;"></a>
+      <h2 style="margin:0; font-size:1.5rem;">MYSPACE</h2>
+    </div>
+     <nav>
+      <ul style="list-style:none; display:flex; gap:1.2rem; margin:0; padding:0;">
+        <li><a href="/" style="color:#fff; text-decoration:none;">Home</a></li>
+        <li><a href="/about" style="color:#fff; text-decoration:none;">About</a></li>
+        <li><a href="/dashboard" style="color:#fff; text-decoration:none;">Dashboard</a></li>
+        <li><a href="/contact" style="color:#fff; text-decoration:none;">Contact</a></li>
+         <li style="position:relative;">
+  <a href="" style="color:#fff; text-decoration:none;">Account</a>
+  <ul style="position:absolute; top:100%; left:0; background:#222; padding:0.5rem 1rem; margin:0; display:none; border-radius:6px;">
+    <li style="margin:0.3rem 0;"><a href="/profile" style="color:#fff; text-decoration:none;">Profile</a></li>
+    <li style="margin:0.3rem 0;"><a href="/register" style="color:#fff; text-decoration:none;">Register</a></li>
+    <li style="margin:0.3rem 0;"><a href="/login" style="color:#fff; text-decoration:none;">Login</a></li>
+  </ul>
+</li>
+
+<script>
+  // Simple hover effect for dropdown
+  const accountLink = document.querySelector('li[style*="position:relative;"]');
+  const dropdown = accountLink.querySelector("ul");
+
+  accountLink.addEventListener("mouseenter", () => {
+    dropdown.style.display = "block";
+  });
+
+  accountLink.addEventListener("mouseleave", () => {
+    dropdown.style.display = "none";
+  });
+</script>
+  </header>
+
+ <section class="about">
+  <h1>About Us</h1>
+  <p>
+    MySpace is a platform built for entrepreneurs, farmers, and shop owners 
+    who want to showcase their work and connect with customers. 
+    We believe every local business deserves a digital presence, 
+    and we’re here to make it simple.
+  </p>
+
+  <h2>Our Mission</h2>
+  <p>
+    To empower small and medium businesses by giving them visibility 
+    and helping them reach more customers online.
+  </p>
+
+  <h2>Why Choose MySpace?</h2>
+  <ul>
+    <li>Easy to showcase your shop and products</li>
+    <li>Connect directly with potential customers</li>
+    <li>Free and simple to use</li>
+  </ul>
+</section>
+
+
+  <footer>
+    <p>&copy; <%= new Date().getFullYear() %> MySpace | All Rights Reserved</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+     <div class="logo" style="display:flex; align-items:center; gap:10px;">
+     <a href="/"><img src="images/Screenshot 2025-09-04 162733.png" alt="" style="height:50px; width:auto;"></a>
+      <h2 style="margin:0; font-size:1.5rem;">MYSPACE</h2>
+    </div>
+     <nav>
+      <ul style="list-style:none; display:flex; gap:1.2rem; margin:0; padding:0;">
+        <li><a href="/" style="color:#fff; text-decoration:none;">Home</a></li>
+        <li><a href="/about" style="color:#fff; text-decoration:none;">About</a></li>
+        <li><a href="/dashboard" style="color:#fff; text-decoration:none;">Dashboard</a></li>
+        <li><a href="/contact" style="color:#fff; text-decoration:none;">Contact</a></li>
+         <li style="position:relative;">
+  <a href="" style="color:#fff; text-decoration:none;">Account</a>
+  <ul style="position:absolute; top:100%; left:0; background:#222; padding:0.5rem 1rem; margin:0; display:none; border-radius:6px;">
+    <li style="margin:0.3rem 0;"><a href="/profile" style="color:#fff; text-decoration:none;">Profile</a></li>
+    <li style="margin:0.3rem 0;"><a href="/register" style="color:#fff; text-decoration:none;">Register</a></li>
+    <li style="margin:0.3rem 0;"><a href="/login" style="color:#fff; text-decoration:none;">Login</a></li>
+     <li style="margin:0.3rem 0;"><a href="/ADMIN" style="color:red; text-decoration:none;">ADMIN</a></li>
+  </ul>
+</li>
+
+<script>
+  // Simple hover effect for dropdown
+  const accountLink = document.querySelector('li[style*="position:relative;"]');
+  const dropdown = accountLink.querySelector("ul");
+
+  accountLink.addEventListener("mouseenter", () => {
+    dropdown.style.display = "block";
+  });
+
+  accountLink.addEventListener("mouseleave", () => {
+    dropdown.style.display = "none";
+  });
+</script>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1 style="font-family:'Playfair Display'">Supercharge your online business with MySpace</h1>
+      <p>Join successful business owners. Expand your reach. Connect with thousands of buyers today.</p><br>
+
+
+      <br><a href="#application" class="cta-btn">SELL WITH US </a></br>
+
+    </div>
+  </section>
+
+ <!-- Stats Section -->
+<section class="stats" style="padding:3rem 1rem; background:#f9f9f9; text-align:center;">
+  <h2 style="font-size:2rem; margin-bottom:2rem; font-family:'Playfair Display',serif; color:#333;">What We Have</h2>
+  <div class="stats-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1.5rem; max-width:900px; margin:0 auto;">
+    <div style="background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      <h3 style="font-size:2rem; color:#f39c12; margin-bottom:0.5rem;">4000+</h3>
+      <p style="margin:0; color:#555;">Clients Await You</p>
+    </div>
+    <div style="background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      <h3 style="font-size:2rem; color:#f39c12; margin-bottom:0.5rem;">4M+</h3>
+      <p style="margin:0; color:#555;">Active Buyers</p>
+    </div>
+    <div style="background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      <h3 style="font-size:2rem; color:#f39c12; margin-bottom:0.5rem;">50x</h3>
+      <p style="margin:0; color:#555;">Leads with Premium Tools</p>
+    </div>
+    <div style="background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      <h3 style="font-size:2rem; color:#f39c12; margin-bottom:0.5rem;">10+</h3>
+      <p style="margin:0; color:#555;">Years of Trust</p>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features" style="padding:3rem 1rem; text-align:center;">
+  <h2 style="font-size:2rem; margin-bottom:2rem; font-family:'Playfair Display',serif; color:#333;">What You Can Do</h2>
+  <div class="features-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; max-width:1000px; margin:0 auto;">
+    <div style="background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      💸 <h3 style="margin:0.5rem 0; color:#f39c12;">Sell Anything</h3>
+      <p style="margin:0; color:#555;">From a pin to a car, reach the right buyer fast.</p>
+    </div>
+    <div style="background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      🤝 <h3 style="margin:0.5rem 0; color:#f39c12;">Find Clients</h3>
+      <p style="margin:0; color:#555;">Get steady customers for your services.</p>
+    </div>
+    <div style="background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      🏘 <h3 style="margin:0.5rem 0; color:#f39c12;">Rent or Sell Property</h3>
+      <p style="margin:0; color:#555;">Connect with genuine buyers & tenants.</p>
+    </div>
+    <div style="background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      💼 <h3 style="margin:0.5rem 0; color:#f39c12;">Post Jobs</h3>
+      <p style="margin:0; color:#555;">Hire skilled employees with ease.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials" style="padding:3rem 1rem; background:#f9f9f9; text-align:center;">
+  <h2 style="font-size:2rem; margin-bottom:2rem; font-family:'Playfair Display',serif; color:#333;">Loved by Thousands of Entrepreneurs</h2>
+  <div class="testimonial-cards" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; max-width:1000px; margin:0 auto;">
+    <div class="testimonial" style="background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      <p style="font-style:italic; color:#444;">"Very effective app, I get buyers within days of posting products, even hours sometimes 👍"</p>
+      <h4 style="margin-top:1rem; color:#111;">Edward Kipsang – Eldoret</h4>
+    </div>
+    <div class="testimonial" style="background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      <p style="font-style:italic; color:#444;">"This platform really helped my business grow. I give it 5 stars."</p>
+      <h4 style="margin-top:1rem; color:#111;">Mwangi Waweru – Nairobi</h4>
+    </div>
+    <div class="testimonial" style="background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      <p style="font-style:italic; color:#444;">"Easy to navigate and great for communication between buyers and sellers 👌"</p>
+      <h4 style="margin-top:1rem; color:#111;">Jamal Khasim – Mombasa</h4>
+    </div>
+  </div>
+</section>
+
+
+<!-- Featured Businesses -->
+<section class="featured" style="padding:3rem 1rem; text-align:center; background:#fafafa;">
+  <h2 style="font-size:2rem; margin-bottom:2rem; font-family:'Playfair Display',serif; color:#333;">
+    Featured Businesses
+  </h2>
+  <div class="cards" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; max-width:1000px; margin:0 auto;">
+    
+    <!-- Bakery -->
+    <div class="card" style="background:#fff; padding:1rem; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.08); transition:transform 0.3s;">
+      <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+           alt="Bakery" 
+           style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
+      <h3 style="margin:0.8rem 0; color:#f39c12; font-family:'Roboto',sans-serif;">Jane’s Bakery</h3>
+      <p style="margin:0; color:#555;">Fresh bread, cakes, and pastries daily.</p>
+    </div>
+    
+    <!-- Farm Produce -->
+    <div class="card" style="background:#fff; padding:1rem; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.08); transition:transform 0.3s;">
+      <img src="images/farm.png" 
+           alt="Farm Produce" 
+           style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
+      <h3 style="margin:0.8rem 0; color:#f39c12; font-family:'Roboto',sans-serif;">Kyalo’s Farm Produce</h3>
+      <p style="margin:0; color:#555;">Organic fruits and vegetables straight from the farm.</p>
+    </div>
+    
+    <!-- Hardware -->
+    <div class="card" style="background:#fff; padding:1rem; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.08); transition:transform 0.3s;">
+      <img src="images/hardware.png" 
+           alt="Hardware Store" 
+           style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
+      <h3 style="margin:0.8rem 0; color:#f39c12; font-family:'Roboto',sans-serif;">Mike’s Hardware</h3>
+      <p style="margin:0; color:#555;">Your go-to for building tools and materials.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Application Section -->
+<section class="application"  
+  style="padding:3rem 1rem; background:#f9f9f9; text-align:center; font-family:'Roboto', sans-serif;">
+  
+  <h2 style="font-size:2rem; margin-bottom:2rem; font-family:'Playfair Display', serif; color:#333;">
+    Get Started in 4 Easy Steps
+  </h2>
+
+  <div style="display:block; max-width:700px; margin:0 auto; text-align:left;">
+    
+    <!-- Steps List -->
+    <div style="background:#fff; padding:2rem; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); margin-bottom:2rem;">
+      <h3 style="margin-bottom:1.2rem; color:#f39c12; font-size:1.4rem;">Steps</h3>
+      <ol style="list-style:none; padding:0; margin:0; display:grid; gap:1rem; font-size:1rem; color:#444;">
+        <li style="display:flex; align-items:center; gap:0.8rem;">
+          <span style="background:#f39c12; color:#fff; font-weight:bold; width:30px; height:30px; 
+                       border-radius:50%; display:flex; align-items:center; justify-content:center;">
+            1
+          </span>
+          <p style="margin:0;">Submit your application form</p>
+        </li>
+        <li style="display:flex; align-items:center; gap:0.8rem;">
+          <span style="background:#f39c12; color:#fff; font-weight:bold; width:30px; height:30px; 
+                       border-radius:50%; display:flex; align-items:center; justify-content:center;">
+            2
+          </span>
+          <p style="margin:0;">Get a call from our manager</p>
+        </li>
+        <li style="display:flex; align-items:center; gap:0.8rem;">
+          <span style="background:#f39c12; color:#fff; font-weight:bold; width:30px; height:30px; 
+                       border-radius:50%; display:flex; align-items:center; justify-content:center;">
+            3
+          </span>
+          <p style="margin:0;">Access MySpace tools</p>
+        </li>
+        <li style="display:flex; align-items:center; gap:0.8rem;">
+          <span style="background:#f39c12; color:#fff; font-weight:bold; width:30px; height:30px; 
+                       border-radius:50%; display:flex; align-items:center; justify-content:center;">
+            4
+          </span>
+          <p style="margin:0;">Start attracting new customers</p>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Application Form -->
+    <div id="application" style="background:#fff; padding:2rem; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+      <h3 style="margin-bottom:1.2rem; color:#f39c12; font-size:1.4rem;">Application Form</h3>
+      <form action="/apply" method="POST" class="application-form" 
+            style="display:grid; gap:1rem;">
+        
+        <input type="text" name="firstName" placeholder="First Name" required
+               style="padding:0.8rem; border:1px solid #ddd; border-radius:6px;">
+        <input type="text" name="secondName" placeholder="Second Name" required
+               style="padding:0.8rem; border:1px solid #ddd; border-radius:6px;">
+        <input type="text" name="lastName" placeholder="Last Name" required
+               style="padding:0.8rem; border:1px solid #ddd; border-radius:6px;">
+        <input type="text" name="businessName" placeholder="Business Name" required
+               style="padding:0.8rem; border:1px solid #ddd; border-radius:6px;">
+        <input type="email" name="email" placeholder="Email Address" required
+               style="padding:0.8rem; border:1px solid #ddd; border-radius:6px;">
+        <input type="tel" name="phone" placeholder="Phone Number" required
+               style="padding:0.8rem; border:1px solid #ddd; border-radius:6px;">
+        <input type="text" name="address" placeholder="Business Address" required
+               style="padding:0.8rem; border:1px solid #ddd; border-radius:6px;">
+
+        <button type="submit" class="cta-btn" 
+                style="padding:0.9rem; background:#f39c12; border:none; border-radius:6px; 
+                       color:#fff; font-size:1rem; cursor:pointer; transition:all 0.3s;">
+          Submit Application
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <%= new Date().getFullYear() %> MySpace | All Rights Reserved</p>
+  </footer>
+</body>
+</html>

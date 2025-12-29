@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet">
+  <title>Profile | MySpace</title>
+
+  <style>
+/* ---------- Profile Container ---------- */
+.profile-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* ---------- Title ---------- */
+.profile-container .title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* ---------- Profile Picture ---------- */
+.profile-pic {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.profile-pic .profile-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #3498db;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+/* ---------- Profile Display ---------- */
+#profile-display p {
+  font-size: 1rem;
+  color: #444;
+  margin: 0.4rem 0;
+}
+
+/* ---------- Product Grid ---------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.product-card {
+  background: #fafafa;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.product-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.product-details {
+  padding: 0.8rem 1rem;
+}
+
+.product-details h4 {
+  margin-bottom: 0.3rem;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.product-details .price {
+  color: #27ae60;
+  font-weight: 600;
+  margin: 0.3rem 0;
+}
+
+.product-details .location {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.delete-form {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.delete-btn {
+  background: rgba(231,76,60,0.9);
+  color: #fff;
+  border: none;
+  font-size: 1rem;
+  border-radius: 50%;
+  padding: 5px 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: rgba(192,57,43,1);
+}
+
+/* ---------- Edit Form ---------- */
+#profile-form {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+  transition: opacity 0.3s ease;
+}
+
+#profile-form label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #333;
+}
+
+#profile-form input[type="text"],
+#profile-form input[type="number"],
+#profile-form input[type="file"],
+#profile-form textarea {
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+}
+
+#productDetailsContainer {
+  background: #fff;
+  padding: 1rem;
+  border: 1px dashed #bbb;
+  border-radius: 8px;
+}
+
+/* Product input card inside form */
+.product-input-card {
+  background: #fefefe;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+}
+
+.product-input-card h4 {
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  color: #3498db;
+}
+
+/* ---------- Buttons ---------- */
+.btn-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn {
+  padding: 0.7rem 1.5rem;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn:hover {
+  background: #2980b9;
+}
+
+.btn-edit {
+  background: #3498db;
+}
+
+.btn-save {
+  background: #2ecc71;
+}
+
+.btn-save:hover {
+  background: #27ae60;
+}
+
+.btn-cancel {
+  background: #e74c3c;
+}
+
+.btn-cancel:hover {
+  background: #c0392b;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden;
+  opacity: 0;
+}
+/* Smooth transition setup */
+#profile-display,
+#profile-form {
+  transition: all 0.4s ease-in-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hidden state (used by JS toggle) */
+.hidden {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+/* Optional: prevent layout jump */
+#profile-display,
+#profile-form {
+  will-change: opacity, transform;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo" style="display:flex; align-items:center; gap:10px;">
+      <a href="/"><img src="images/Screenshot 2025-09-04 162733.png" alt="" style="height:50px; width:auto;"></a>
+      <h2 style="margin:0; font-size:1.5rem;">MYSPACE</h2>
+    </div>
+    <nav>
+      <ul style="list-style:none; display:flex; gap:1.2rem; margin:0; padding:0;">
+        <li><a href="/" style="color:#fff; text-decoration:none;">Home</a></li>
+        <li><a href="/about" style="color:#fff; text-decoration:none;">About</a></li>
+        <li><a href="/dashboard" style="color:#fff; text-decoration:none;">Dashboard</a></li>
+        <li><a href="/contact" style="color:#fff; text-decoration:none;">Contact</a></li>
+        <li style="position:relative;">
+           <a href="" style="color:#fff; text-decoration:none;">Account</a>
+  <ul style="position:absolute; top:100%; left:0; background:#222; padding:0.5rem 1rem; margin:0; display:none; border-radius:6px;">
+    <li style="margin:0.3rem 0;"><a href="/profile" style="color:#fff; text-decoration:none;">Profile</a></li>
+    <li style="margin:0.3rem 0;"><a href="/register" style="color:#fff; text-decoration:none;">Register</a></li>
+    <li style="margin:0.3rem 0;"><a href="/login" style="color:#fff; text-decoration:none;">Login</a></li>
+     <li style="margin:0.3rem 0;"><a href="/ADMIN" style="color:red; text-decoration:none;">ADMIN</a></li>
+  </ul>
+</li>
+      </ul>
+    </nav>
+    <script>
+  // Simple hover effect for dropdown
+  const accountLink = document.querySelector('li[style*="position:relative;"]');
+  const dropdown = accountLink.querySelector("ul");
+
+  accountLink.addEventListener("mouseenter", () => {
+    dropdown.style.display = "block";
+  });
+
+  accountLink.addEventListener("mouseleave", () => {
+    dropdown.style.display = "none";
+  });
+</script>
+  </header>
+
+<section class="profile-container">
+  <h2 class="title">Your Profile</h2>
+
+  <!-- Profile Image -->
+  <div class="profile-pic">
+    <img src="<%= user.profileImage || '/images/default-avatar.png' %>"
+         alt="Profile Picture"
+         class="profile-img">
+  </div>
+
+  <!-- ===== DISPLAY SECTION ===== -->
+  <div id="profile-display"  >
+    <p><strong>Name:</strong> <%= user.firstName %> <%= user.lastName %></p>
+    <p><strong>Email:</strong> <%= user.email %></p>
+    <p><strong>Business:</strong> <%= user.businessName %></p>
+    <p><strong>Phone:</strong> <%= user.phone %></p>
+    <p><strong>Address:</strong> <%= user.address %></p>
+    <p><strong>Location:</strong> <%= user.location || "Not set" %></p>
+    
+ <!-- NEW SECTIONS GRID -->
+  <section>
+  <div class="profile-sections">
+
+   <!-- ========================= -->
+<!-- BOOKMARKS SECTION -->
+<!-- ========================= -->
+
+<a href="/profile/bookmarks" class="profile-box">
+  <div class="icon-wrap">
+    <i class="fas fa-bookmark"></i>
+  </div>
+
+  <button id="viewBookmarksBtn">View My Bookmarks</button>
+  <p>Saved products you want to check later.</p>
+</a>
+
+<!-- ========================= -->
+<!-- BOOKMARK MODAL -->
+<!-- ========================= -->
+
+<div id="bookmarkModal" class="modal">
+  <div class="modal-content">
+    <span id="closeBookmarkModal" class="close">&times;</span>
+    <h2>My Bookmarks</h2>
+
+    <div id="bookmarkContainer" class="bookmark-grid">
+      <% if (!user.bookmarks || user.bookmarks.length === 0) { %>
+        <p>You have no bookmarks yet.</p>
+      <% } else { %>
+        <% user.bookmarks.forEach(bookmark => { %>
+          <div class="bookmark-card">
+            <img src="<%= bookmark.url %>" alt="<%= bookmark.name %>">
+            <h3><%= bookmark.name %></h3>
+            <button class="remove-bookmark-btn" data-id="<%= bookmark._id %>">Remove</button>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<!-- ========================= -->
+<!-- BOOKMARK MODAL SCRIPT -->
+<!-- ========================= -->
+
+<script>
+  // Grab modal elements
+  const bookmarkModal = document.getElementById("bookmarkModal");
+  const viewBookmarksBtn = document.getElementById("viewBookmarksBtn");
+  const closeBookmarkModal = document.getElementById("closeBookmarkModal");
+  const bookmarkContainer = document.getElementById("bookmarkContainer");
+
+  // ---------------------------
+  // Open Modal
+  // ---------------------------
+  viewBookmarksBtn.addEventListener("click", (e) => {
+    e.preventDefault(); // prevent default anchor click behavior
+    console.log("📌 View Bookmarks clicked");
+
+    if (!bookmarkContainer) {
+      console.warn("⚠️ bookmarkContainer not found");
+    }
+
+    bookmarkModal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  });
+
+  // ---------------------------
+  // Close Modal
+  // ---------------------------
+  closeBookmarkModal.addEventListener("click", () => {
+    console.log("❌ Close bookmark modal clicked");
+    bookmarkModal.style.display = "none";
+    document.body.style.overflow = "auto";
+  });
+
+  // ---------------------------
+  // Close Modal on Background Click
+  // ---------------------------
+  bookmarkModal.addEventListener("click", (e) => {
+    if (e.target === bookmarkModal) {
+      console.log("❌ Background clicked, closing bookmark modal");
+      bookmarkModal.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+  });
+
+  // ---------------------------
+  // Remove Bookmark Button
+  // ---------------------------
+  document.querySelectorAll(".remove-bookmark-btn").forEach(btn => {
+    btn.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      const id = btn.dataset.id;
+      console.log("🗑️ Remove bookmark clicked:", id);
+
+      try {
+        const res = await fetch(`/profile/bookmarks/remove/${id}`, { method: "POST" });
+        if (res.ok) {
+          console.log("✅ Bookmark removed successfully");
+          btn.closest(".bookmark-card").remove();
+
+          if (document.querySelectorAll(".bookmark-card").length === 0) {
+            bookmarkContainer.innerHTML = "<p>You have no bookmarks yet.</p>";
+          }
+        } else {
+          console.warn("⚠️ Failed to remove bookmark");
+        }
+      } catch (err) {
+        console.error("❌ Error removing bookmark:", err);
+      }
+    });
+  });
+</script>
+
+    <!-- MESSAGES -->
+    <a href="/profile/messages" class="profile-box">
+      <div class="icon-wrap">
+        <i class="fas fa-envelope"></i>
+      </div>
+      <h4>Messages</h4>
+      <p>Your conversations with sellers & buyers.</p>
+    </a>
+
+    <!-- CART -->
+    <a href="/profile/cart" class="profile-box">
+      <div class="icon-wrap">
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+      <h4>Cart</h4>
+      <p>Items you're ready to purchase.</p>
+    </a>
+
+  </div>
+</section>
+
+    <h3>Products</h3>
+    <div class="product-grid">
+      <% if (user.businessImages && user.businessImages.length > 0) { %>
+        <% user.businessImages.forEach(function(prod) { %>
+          <div class="product-card">
+            <img src="<%= prod.url %>" alt="<%= prod.name %>" class="product-image">
+            <div class="product-details">
+              <h4><%= prod.name %></h4>
+              <p class="price">Ksh <%= prod.price %></p>
+              <p><%= prod.description %></p>
+              <p class="location">📍 <%= prod.location %></p>
+              <p><strong>Category:</strong> <%= prod.category || "Uncategorized" %></p>
+              <p><strong>Features:</strong> <%= prod.features || "Uncategorized" %></p>
+            </div>
+            <form action="/profile/delete-image" method="POST" class="delete-form">
+              <input type="hidden" name="imagePath" value="<%= prod.url %>">
+              <button type="submit" class="delete-btn">✕</button>
+            </form>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>No products uploaded yet.</p>
+      <% } %>
+    </div>
+    
+  </div>
+  <!-- ===== END DISPLAY ===== -->
+
+ <form id="profile-form" class="hidden" action="/profile/update" method="POST" enctype="multipart/form-data">
+    <label>Phone:</label>
+    <input type="text" name="phone" value="<%= user.phone %>"><br><br>
+
+    <label>Address:</label>
+    <input type="text" name="address" value="<%= user.address %>"><br><br>
+
+    <label>Location:</label>
+    <input type="text" name="location" value="<%= user.location %>"><br><br>
+
+    <label>Profile Image:</label>
+    <input type="file" name="profileImage"><br><br>
+
+    <label>Upload New Product Images:</label>
+    <input type="file" id="productImages" name="businessImages" multiple><br><br>
+
+    <div id="productDetailsContainer"></div>
+
+    <button type="submit" class="btn btn-save">Save</button>
+    <button type="button" id="cancel-btn" class="btn btn-cancel">Cancel</button>
+  </form>
+
+  <!-- ===== END EDIT FORM ===== -->
+
+  <!-- Buttons -->
+  <div class="btn-row">
+    <button id="edit-btn" class="btn btn-edit">Edit Profile</button>
+    <a href="/logout" class="btn" style="background:#e74c3c;color:#fff;">Logout</a>
+  </div>
+
+  
+</section>
+
+  
+
+<!-- ====== SCRIPTS ====== -->
+
+
+
+<script>
+  // Product Details Input for Each Uploaded Image
+  const productInput = document.getElementById('productImages');
+  const productDetailsContainer = document.getElementById('productDetailsContainer');
+
+  productInput.addEventListener('change', (e) => {
+    productDetailsContainer.innerHTML = ''; // clear previous entries
+    const files = e.target.files;
+
+    Array.from(files).forEach((file) => {
+      const div = document.createElement('div');
+      div.classList.add('product-input-card');
+
+      div.innerHTML = `
+        <div class="product-input-card">
+          <h4>Details for: ${file.name}</h4>
+
+          <label>Product Name:</label>
+          <input type="text" name="productNames[]" placeholder="e.g. Fresh Tomatoes" required><br><br>
+
+          <label>Price (Ksh):</label>
+          <input type="number" name="productPrices[]" placeholder="e.g. 250" required><br><br>
+
+          <label for="productCategories">Category:</label>
+          <select name="productCategories[]" id="productCategories" required>
+            <option value="">-- Select a Category --</option>
+
+            <!-- same category options as before -->
+<optgroup label="🧑‍🌾 Farming & Agriculture">
+    <option value="farming/seeds">🌱 Seeds & Seedlings</option>
+    <option value="farming/fertilizers">🧪 Fertilizers & Manure</option>
+    <option value="farming/pesticides">☠️ Pesticides & Herbicides</option>
+    <option value="farming/tools">🧰 Farm Tools & Equipment</option>
+    <option value="farming/irrigation">💧 Irrigation Systems</option>
+    <option value="farming/greenhouses">🏗️ Greenhouses & Nets</option>
+
+    <optgroup label="🐄 Livestock & Poultry">
+      <option value="farming/livestock/cows">🐮 Cows</option>
+      <option value="farming/livestock/goats">🐐 Goats</option>
+      <option value="farming/livestock/chickens">🐔 Chickens</option>
+      <option value="farming/livestock/rabbits">🐇 Rabbits</option>
+      <option value="farming/livestock/feeds">🥬 Animal Feeds</option>
+      <option value="farming/livestock/equipment">🪣 Milking Equipment</option>
+    </optgroup>
+
+    <optgroup label="🍎 Farm Produce">
+      <option value="farming/produce/fruits">🍉 Fruits</option>
+      <option value="farming/produce/vegetables">🥕 Vegetables</option>
+      <option value="farming/produce/grains">🌾 Grains</option>
+      <option value="farming/produce/roots">🥔 Root Crops</option>
+      <option value="farming/produce/spices">🌿 Herbs & Spices</option>
+    </optgroup>
+  </optgroup>
+
+  <!-- 💻 Electronics & Appliances -->
+  <optgroup label="💻 Electronics & Appliances">
+    <option value="electronics/phones">📱 Phones & Tablets</option>
+    <option value="electronics/computers">💻 Computers & Laptops</option>
+    <option value="electronics/tvs">📺 TVs & Home Theatres</option>
+    <option value="electronics/kitchen">🍳 Kitchen Appliances</option>
+    <option value="electronics/solar">🔋 Solar Panels & Batteries</option>
+    <option value="electronics/accessories">🎧 Accessories</option>
+  </optgroup>
+
+  <!-- 🚗 Vehicles & Machinery -->
+  <optgroup label="🚗 Vehicles & Machinery">
+    <option value="vehicles/cars">🚙 Cars</option>
+    <option value="vehicles/bikes">🏍️ Motorcycles</option>
+    <option value="vehicles/trucks">🚛 Trucks</option>
+    <option value="vehicles/farm-machines">🚜 Tractors & Ploughs</option>
+    <option value="vehicles/spare-parts">🔧 Spare Parts & Accessories</option>
+  </optgroup>
+
+  <!-- 👕 Fashion & Beauty -->
+  <optgroup label="👕 Fashion & Beauty">
+    <option value="fashion/men">👔 Men’s Clothing</option>
+    <option value="fashion/women">👗 Women’s Clothing</option>
+    <option value="fashion/shoes">👟 Shoes</option>
+    <option value="fashion/watches">⌚ Watches & Jewelry</option>
+    <option value="fashion/cosmetics">💄 Cosmetics & Skin Care</option>
+  </optgroup>
+
+  <!-- 🏠 Home & Furniture -->
+  <optgroup label="🏠 Home & Furniture">
+    <option value="home/furniture">🛋️ Furniture</option>
+    <option value="home/lighting">💡 Lighting</option>
+    <option value="home/decor">🖼️ Home Decor</option>
+    <option value="home/appliances">🏠 Home Appliances</option>
+    <option value="home/kitchen">🍽️ Kitchenware</option>
+    <option value="home/cleaning">🧹 Cleaning & Maintenance</option>
+  </optgroup>
+
+  <!-- 🏘️ Real Estate -->
+  <optgroup label="🏘️ Real Estate">
+    <option value="real-estate/houses">🏡 Houses for Sale</option>
+    <option value="real-estate/rentals">🏠 Houses for Rent</option>
+    <option value="real-estate/land">🌄 Land & Plots</option>
+    <option value="real-estate/commercial">🏢 Commercial Properties</option>
+  </optgroup>
+
+  <!-- 🧰 Services -->
+  <optgroup label="🧰 Services">
+    <option value="services/transport">🚚 Transport & Logistics</option>
+    <option value="services/farming">🌾 Farm Labour & Consultancy</option>
+    <option value="services/repairs">🔧 Repairs & Maintenance</option>
+    <option value="services/cleaning">🧽 Cleaning Services</option>
+    <option value="services/it">💻 IT & Digital Services</option>
+    <option value="services/education">📚 Education & Training</option>
+  </optgroup>
+
+  <!-- 🧃 Other Categories -->
+  <optgroup label="🧃 Other Categories">
+    <option value="others/books">📖 Books & Stationery</option>
+    <option value="others/pets">🐶 Pets & Animals</option>
+    <option value="others/art">🎨 Art & Crafts</option>
+    <option value="others/antiques">🏺 Antiques & Collectibles</option>
+  </optgroup>
+              
+          </select>
+          <br><br>
+
+          <!-- 🧩 NEW OPTIONAL FIELDS -->
+          <label>Type (optional):</label>
+          <input type="text" name="productTypes[]" placeholder="e.g. Organic, Digital, Handmade"><br><br>
+
+          <label>Brand (optional):</label>
+          <input type="text" name="productBrands[]" placeholder="e.g. Samsung, John Deere"><br><br>
+
+          <label>Material (optional):</label>
+          <input type="text" name="productMaterials[]" placeholder="e.g. Plastic, Metal, Leather"><br><br>
+
+          <label>Condition (optional):</label>
+          <select name="productConditions[]">
+            <option value="">-- Select Condition --</option>
+            <option value="Brand New">Brand New</option>
+            <option value="Used">Used</option>
+            <option value="Refurbished">Refurbished</option>
+          </select><br><br>
+
+          <label>Color (optional):</label>
+          <input type="text" name="productColors[]" placeholder="e.g. Red, Green, Silver"><br><br>
+
+          <label>Features (optional):</label>
+          <textarea name="productFeatures[]" rows="2" placeholder="e.g. waterproof, solar-powered"></textarea><br><br>
+
+          <label>Description:</label>
+          <textarea name="productDescriptions[]" rows="2" placeholder="Short description..." required></textarea><br><br>
+
+          <label>Location (optional):</label>
+          <input type="text" name="productLocations[]" value="<%= user.location %>" placeholder="e.g. Kitengela">
+          <hr>
+        </div>
+      `;
+
+      productDetailsContainer.appendChild(div);
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("profile-form").classList.add("hidden");
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const editBtn = document.getElementById("edit-btn");
+    const cancelBtn = document.getElementById("cancel-btn");
+    const profileForm = document.getElementById("profile-form");
+    const profileDisplay = document.getElementById("profile-display");
+
+    // Always start hidden
+    profileForm.classList.add("hidden");
+    profileDisplay.classList.remove("hidden");
+    editBtn.style.display = "inline-block";
+
+    // ✅ When clicking "Edit Profile"
+    editBtn.addEventListener("click", () => {
+      profileDisplay.classList.add("hidden");
+      profileForm.classList.remove("hidden");
+      editBtn.style.display = "none";
+    });
+
+    // ✅ When clicking "Cancel"
+    cancelBtn.addEventListener("click", () => {
+      profileForm.classList.add("hidden");
+      profileDisplay.classList.remove("hidden");
+      editBtn.style.display = "inline-block";
+    });
+  });
+</script>
+
+
+</body>
+</html>

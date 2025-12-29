@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | MySpace</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Roboto', sans-serif; background:#f4f6f9; margin:0;">
+
+  <!-- Navbar -->
+  <header class="navbar">
+     <div class="logo" style="display:flex; align-items:center; gap:10px;">
+     <a href="/"><img src="images/Screenshot 2025-09-04 162733.png" alt="" style="height:50px; width:auto;"></a>
+      <h2 style="margin:0; font-size:1.5rem;">MYSPACE</h2>
+    </div>
+     <nav>
+      <ul style="list-style:none; display:flex; gap:1.2rem; margin:0; padding:0;">
+        <li><a href="/" style="color:#fff; text-decoration:none;">Home</a></li>
+        <li><a href="/about" style="color:#fff; text-decoration:none;">About</a></li>
+        <li><a href="/dashboard" style="color:#fff; text-decoration:none;">Dashboard</a></li>
+        <li><a href="/contact" style="color:#fff; text-decoration:none;">Contact</a></li>
+         <li style="position:relative;">
+  <a href="" style="color:#fff; text-decoration:none;">Account</a>
+  <ul style="position:absolute; top:100%; left:0; background:#222; padding:0.5rem 1rem; margin:0; display:none; border-radius:6px;">
+    <li style="margin:0.3rem 0;"><a href="/profile" style="color:#fff; text-decoration:none;">Profile</a></li>
+    <li style="margin:0.3rem 0;"><a href="/register" style="color:#fff; text-decoration:none;">Register</a></li>
+    <li style="margin:0.3rem 0;"><a href="/login" style="color:#fff; text-decoration:none;">Login</a></li>
+     <li style="margin:0.3rem 0;"><a href="/ADMIN" style="color:red; text-decoration:none;">ADMIN</a></li>
+  </ul>
+</li>
+
+<script>
+  // Simple hover effect for dropdown
+  const accountLink = document.querySelector('li[style*="position:relative;"]');
+  const dropdown = accountLink.querySelector("ul");
+
+  accountLink.addEventListener("mouseenter", () => {
+    dropdown.style.display = "block";
+  });
+
+  accountLink.addEventListener("mouseleave", () => {
+    dropdown.style.display = "none";
+  });
+</script>
+  </header>
+
+  <!-- User management -->
+<section class="user-management">
+  <h2>User Management</h2>
+
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Business</th>
+        <th>Phone</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (users && users.length > 0) { %>
+        <% users.forEach(u => { %>
+          <tr>
+            <td><%= u.firstName %> <%= u.lastName %></td>
+            <td><%= u.email %></td>
+            <td><%= u.businessName %></td>
+            <td><%= u.phone %></td>
+            <td>
+              <% if (u.suspended) { %>
+                <span class="status suspended">Suspended</span>
+              <% } else if (u.ban && u.ban.status) { %>
+                <span class="status banned">Banned (<%= u.ban.days %> days)</span>
+              <% } else if (u.approved) { %>
+                <span class="status approved">Approved</span>
+              <% } else { %>
+                <span class="status pending">Pending</span>
+              <% } %>
+            </td>
+            <td>
+              <div class="actions-grid">
+                <% if (!u.approved) { %>
+                  <a href="/admin/approve/<%= u._id %>" class="btn approve">Approve</a>
+                <% } %>
+
+                <% if (!u.suspended) { %>
+                  <a href="/admin/suspend/<%= u._id %>" class="btn suspend">Suspend</a>
+                <% } else { %>
+                  <a href="/admin/unsuspend/<%= u._id %>" class="btn unsuspend">Unsuspend</a>
+                <% } %>
+
+                <% if (!(u.ban && u.ban.status)) { %>
+                  <a href="/admin/ban/<%= u._id %>/7" class="btn ban">Ban 7d</a>
+                <% } else { %>
+                  <a href="/admin/unban/<%= u._id %>" class="btn unban">Unban</a>
+                <% } %>
+
+                <a href="/admin/delete/<%= u._id %>" class="btn delete">Delete</a>
+              </div>
+            </td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="6" class="no-users">No users registered yet.</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</section>
+
+
+</body>
+</html>

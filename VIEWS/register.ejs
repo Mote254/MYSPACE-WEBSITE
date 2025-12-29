@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet">
+  <title>Register | MySpace</title>
+</head>
+<body>
+
+    <!-- Navbar -->
+  <header class="navbar">
+     <div class="logo" style="display:flex; align-items:center; gap:10px;">
+     <a href="/"><img src="images/Screenshot 2025-09-04 162733.png" alt="" style="height:50px; width:auto;"></a>
+      <h2 style="margin:0; font-size:1.5rem;">MYSPACE</h2>
+    </div>
+     <nav>
+      <ul style="list-style:none; display:flex; gap:1.2rem; margin:0; padding:0;">
+        <li><a href="/" style="color:#fff; text-decoration:none;">Home</a></li>
+        <li><a href="/about" style="color:#fff; text-decoration:none;">About</a></li>
+        <li><a href="/dashboard" style="color:#fff; text-decoration:none;">Dashboard</a></li>
+        <li><a href="/contact" style="color:#fff; text-decoration:none;">Contact</a></li>
+         <li style="position:relative;">
+  <a href="" style="color:#fff; text-decoration:none;">Account</a>
+  <ul style="position:absolute; top:100%; left:0; background:#222; padding:0.5rem 1rem; margin:0; display:none; border-radius:6px;">
+    <li style="margin:0.3rem 0;"><a href="/profile" style="color:#fff; text-decoration:none;">Profile</a></li>
+    <li style="margin:0.3rem 0;"><a href="/register" style="color:#fff; text-decoration:none;">Register</a></li>
+    <li style="margin:0.3rem 0;"><a href="/login" style="color:#fff; text-decoration:none;">Login</a></li>
+  </ul>
+</li>
+
+<script>
+  // Simple hover effect for dropdown
+  const accountLink = document.querySelector('li[style*="position:relative;"]');
+  const dropdown = accountLink.querySelector("ul");
+
+  accountLink.addEventListener("mouseenter", () => {
+    dropdown.style.display = "block";
+  });
+
+  accountLink.addEventListener("mouseleave", () => {
+    dropdown.style.display = "none";
+  });
+</script>
+  </header>
+
+ <section style="display:flex; justify-content:center; align-items:center; min-height:80vh;">
+  <form action="/register" method="POST" 
+        style="background:#fff; padding:2rem; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.15); width:350px;">
+    <h2 style="margin-bottom:1.5rem; text-align:center; color:#f39c12;">Create Account</h2>
+
+    <input type="text" name="firstName" placeholder="First Name" required
+           style="width:100%; padding:0.8rem; margin-bottom:1rem; border:1px solid #ddd; border-radius:6px;">
+    <input type="text" name="secondName" placeholder="Second Name"
+           style="width:100%; padding:0.8rem; margin-bottom:1rem; border:1px solid #ddd; border-radius:6px;">
+    <input type="text" name="lastName" placeholder="Surname"
+           style="width:100%; padding:0.8rem; margin-bottom:1rem; border:1px solid #ddd; border-radius:6px;">
+    <input type="text" name="businessName" placeholder="Business Name"
+           style="width:100%; padding:0.8rem; margin-bottom:1rem; border:1px solid #ddd; border-radius:6px;">
+    <input type="text" name="phone" placeholder="Phone Number"
+           style="width:100%; padding:0.8rem; margin-bottom:1rem; border:1px solid #ddd; border-radius:6px;">
+    <input type="email" name="email" placeholder="Email" required
+           style="width:100%; padding:0.8rem; margin-bottom:1rem; border:1px solid #ddd; border-radius:6px;">
+    <div style="position:relative; width:100%; margin-bottom:1.5rem;">
+  <input type="password" id="password" name="password" placeholder="Password" required
+         style="width:100%; padding:0.8rem; border:1px solid #ddd; border-radius:6px; padding-right:40px;">
+
+  <!-- Toggle button -->
+  <span onclick="togglePassword()" 
+        style="position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer; color:#666; font-size:0.9rem;">
+    👁
+  </span>
+</div>
+
+<script>
+  function togglePassword() {
+    const passwordInput = document.getElementById("password");
+    passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+  }
+</script>
+
+    <button type="submit" 
+            style="width:100%; padding:0.9rem; background:#f39c12; border:none; border-radius:6px; 
+                   color:#fff; font-size:1rem; cursor:pointer;">
+      Sign Up
+    </button>
+
+    <p style="margin-top:1rem; text-align:center; font-size:0.9rem;">
+      Already have an account? <a href="/login" style="color:#f39c12; text-decoration:none;">Login</a>
+    </p>
+  </form>
+</section>
+
+</body>
+</html>

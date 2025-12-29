@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONTACT US</title>
+  <link rel="stylesheet" href="styles.css">
+  <Style>
+    /* ===========================
+   CONTACT PAGE STYLING
+=========================== */
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  margin: 0;
+  background: #f9f9f9;
+  color: #333;
+}
+
+.navbar {
+  background: #222;
+  color: #fff;
+  padding: 0.8rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Contact Section */
+.contact {
+  max-width: 650px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  animation: fadeInUp 0.8s ease;
+}
+
+.contact h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 0.8rem;
+}
+
+.contact p {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #555;
+  font-size: 1rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.contact-form label {
+  font-weight: 600;
+  color: #444;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.9rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border: 1px solid #28a745;
+  outline: none;
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+}
+
+.cta-btn {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 0.9rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease-in-out;
+}
+
+.cta-btn:hover {
+  background: #218838;
+  transform: scale(1.03);
+}
+
+/* Simple animation for section */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  background: #222;
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-top: 3rem;
+}
+
+  </Style>
+</head>
+<body>
+
+
+   <!-- Navbar -->
+  <header class="navbar">
+     <div class="logo" style="display:flex; align-items:center; gap:10px;">
+     <a href="/"><img src="images/Screenshot 2025-09-04 162733.png" alt="" style="height:50px; width:auto;"></a>
+      <h2 style="margin:0; font-size:1.5rem;">MYSPACE</h2>
+    </div>
+     <nav>
+      <ul style="list-style:none; display:flex; gap:1.2rem; margin:0; padding:0;">
+        <li><a href="/" style="color:#fff; text-decoration:none;">Home</a></li>
+        <li><a href="/about" style="color:#fff; text-decoration:none;">About</a></li>
+        <li><a href="/dashboard" style="color:#fff; text-decoration:none;">Dashboard</a></li>
+        <li><a href="/contact" style="color:#fff; text-decoration:none;">Contact</a></li>
+         <li style="position:relative;">
+  <a href="" style="color:#fff; text-decoration:none;">Account</a>
+  <ul style="position:absolute; top:100%; left:0; background:#222; padding:0.5rem 1rem; margin:0; display:none; border-radius:6px;">
+    <li style="margin:0.3rem 0;"><a href="/profile" style="color:#fff; text-decoration:none;">Profile</a></li>
+    <li style="margin:0.3rem 0;"><a href="/register" style="color:#fff; text-decoration:none;">Register</a></li>
+    <li style="margin:0.3rem 0;"><a href="/login" style="color:#fff; text-decoration:none;">Login</a></li>
+  </ul>
+</li>
+
+<script>
+  // Simple hover effect for dropdown
+  const accountLink = document.querySelector('li[style*="position:relative;"]');
+  const dropdown = accountLink.querySelector("ul");
+
+  accountLink.addEventListener("mouseenter", () => {
+    dropdown.style.display = "block";
+  });
+
+  accountLink.addEventListener("mouseleave", () => {
+    dropdown.style.display = "none";
+  });
+</script>
+  </header>
+
+<% if (success_msg && success_msg.length) { %>
+  <div class="alert alert-success"><%= success_msg[0] %></div>
+<% } %>
+
+<% if (error_msg && error_msg.length) { %>
+  <div class="alert alert-danger"><%= error_msg[0] %></div>
+<% } %>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const alerts = document.querySelectorAll(".alert");
+    alerts.forEach(alert => {
+      // hide after 4s
+      setTimeout(() => {
+        alert.classList.add("fade-out");
+        setTimeout(() => alert.remove(), 600); // remove after animation
+      }, 4000);
+    });
+  });
+</script>
+
+
+
+
+<section class="contact">
+  <h1>Contact Us</h1>
+  <p>Have questions or feedback? Drop us a message below.</p>
+
+  <form action="/contact" method="POST" class="contact-form">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit" class="cta-btn">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  <p>&copy; <%= new Date().getFullYear() %> MySpace | All Rights Reserved</p>
+</footer>
+
+
+</body>
+</html>
