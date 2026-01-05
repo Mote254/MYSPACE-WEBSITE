@@ -6,7 +6,7 @@ const path = require('path');
 const { User,AuditLog,Client,Admin,Contact } = require("./config");
 const bcrypt = require("bcrypt"); 
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo").default;
 const flash = require("connect-flash");//flash  messages and session creation //
 const { isAuthenticated, isAdmin } = require("./auth");
 const multer = require("multer");
@@ -17,17 +17,22 @@ const app = express();
 app.use(flash());
 
 app.use(session({
+  name: "myspace.sid",
   secret: process.env.SESSION_SECRET || "super-secret-key",
   resave: false,
   saveUninitialized: false,
+
   store: MongoStore.create({
     mongoUrl: process.env.MONGO_URI,
+    collectionName: "sessions",
     ttl: 14 * 24 * 60 * 60 // 14 days
   }),
+
   cookie: {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24, // 1 day
-    secure: false // set true if HTTPS
+    secure: process.env.NODE_ENV === "production", // ✅ Render-safe
+    sameSite: "lax"
   }
 }));
 
@@ -68,12 +73,14 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log("✅ MongoDB connected"))
-.catch(err => console.error("❌ MongoDB connection error:", err));
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("✅ MongoDB connected");
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB connection error:", err);
+  });
+
 
 /* ==========================
    PAGES & ACCOUNT & ADMIN ROUTES
